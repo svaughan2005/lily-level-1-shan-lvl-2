@@ -2743,6 +2743,8 @@ function update(dt) {
 // was the last stage in this level — off to the Level Select screen so
 // they can choose where to go next. Reaching the very last stage of the
 // very last level still ends the game like before.
+
+/*
 function activateCheckpoint(mb) {
   if (mb.activated) return;
   mb.activated = true;
@@ -2776,6 +2778,39 @@ function activateCheckpoint(mb) {
   if (isLastStageOfLevel) {
     // Cleared every stage in this level — hand the player back to Level
     // Select to pick where to go next.
+    showLevelSelect();
+  }
+}
+*/
+
+function activateCheckpoint(mb) {
+  const firstTime = !mb.activated;
+  mb.activated = true;
+
+  // Always sync this run's respawn point, even if this checkpoint was
+  // already completed in a previous session.
+  checkpoint = {
+    x: mb.x,
+    y: mb.y !== undefined ? mb.y : world.def.groundY - mb.height,
+  };
+
+  if (!firstTime) return; // everything below only happens the very first time
+
+  playMailboxBellSound();
+  Progress.completeStage(mb.levelIndex, mb.stageIndex);
+
+  const builtStagesForLevel = WORLD.sections.filter(
+    (s) => s.levelIndex === mb.levelIndex,
+  ).length;
+  const isLastStageOfLevel = mb.stageIndex === builtStagesForLevel - 1;
+  const isLastLevel = mb.levelIndex === LEVEL_COUNT - 1;
+
+  if (isLastStageOfLevel && isLastLevel) {
+    showEndOverlay();
+    return;
+  }
+
+  if (isLastStageOfLevel) {
     showLevelSelect();
   }
 }

@@ -6,7 +6,7 @@
 
 const SAVE_KEY = "tactic_progress_v1";
 const LEVEL_COUNT = 3; // total main levels in the finished game
-const STAGES_PER_LEVEL = 5;
+const STAGES_PER_LEVEL = 3;
 
 // ---------- Persistent save data ----------
 // Shape: { unlocked: ["0-0", ...], completed: ["0-0", ...] }
