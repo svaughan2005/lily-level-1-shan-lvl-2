@@ -260,7 +260,7 @@ canvas {
 
 #level-select-grid {
   display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   grid-template-rows: repeat(3, minmax(0, 1fr));
   gap: clamp(10px, 2.8cqw, 28px);
   width: min(58cqw, 700px);
