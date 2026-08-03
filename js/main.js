@@ -1976,31 +1976,42 @@ function updateTraps(dt) {
 // block with sprite "stackedbox"), queue the special black-hole trap
 // to open (by arming its trapState entry). Only fires once per run.
 function updateCauseAndEffectTriggers(dt) {
-  if (!world || world._blackHoleQueued) return;
-  if (!world.def || !world.def.blocks) return;
+  if (!world || !world.def || !world.def.blocks) return;
 
-  // If the player just landed this frame on a stacked box, trigger the
-  // black-hole trap. Use player.wasGrounded (set at end of update)
-  // to detect landing events.
+  // If the player just landed this frame on a box or stacked box, trigger
+  // the trap entry associated with that specific block.
   if (player.grounded && !player.wasGrounded) {
     const feetY = player.y + player.h;
     for (const b of world.def.blocks) {
-      // blocks that should trigger the hole can be marked `triggersHole: true`
-      if (!(b.sprite === "stackedbox" || b.triggersHole)) continue;
+      if (
+        !(
+          b.sprite === "stackedbox" ||
+          b.sprite === "box" ||
+          b.sprite === "2box" ||
+          b.triggersHole
+        )
+      )
+        continue;
+
       const top = world.def.groundY - b.height;
       const overlapX = player.x + player.w > b.x && player.x < b.x + b.width;
       if (overlapX && Math.abs(feetY - top) <= 8) {
-        world._blackHoleQueued = true;
-        // Arm any trap entries that sit in the same section as this stacked
-        // box so the mechanic works regardless of stage ordering.
-        const secIdx = getSectionIndexForX(b.x);
-        const sec = WORLD.sections[secIdx];
-        if (sec) {
-          for (const tt of world.trapState) {
-            if (tt.armed || tt.fallen) continue;
-            if (tt.x >= sec.startX && tt.x < sec.endX) {
-              tt.armed = true;
-              tt.fallTimer = 0.6;
+        if (b.triggerHoleId) {
+          const trap = world.trapState.find((tt) => tt.id === b.triggerHoleId);
+          if (trap && !trap.armed && !trap.fallen) {
+            trap.armed = true;
+            trap.fallTimer = 0.6;
+          }
+        } else {
+          const secIdx = getSectionIndexForX(b.x);
+          const sec = WORLD.sections[secIdx];
+          if (sec) {
+            for (const tt of world.trapState) {
+              if (tt.armed || tt.fallen) continue;
+              if (tt.x >= sec.startX && tt.x < sec.endX) {
+                tt.armed = true;
+                tt.fallTimer = 0.6;
+              }
             }
           }
         }

@@ -11,23 +11,49 @@ const LEVEL_1_STAGES = [
       "From the outside, everything looks calm and ordinary.\n" +
       "But one sudden movement — and the ground gives way beneath you.\n" +
       "Careful what you jump for.",
-    width: 1280,
+    width: 1900,
     groundY: 550,
     spawn: { x: 80, y: 450 },
-    door: { x: 1150, width: 56, height: 90 },
-    ground: [{ x: 0, width: 1280 }],
+    door: { x: 1770, width: 56, height: 90 },
+    ground: [
+      { x: 0, width: 400 },
+      { x: 760, width: 1140 },
+    ],
 
     blocks: [
-      { x: 301, width: 79, height: 97 },
-      { x: 681, width: 79, height: 97 },
+      { x: 820, width: 79, height: 97, sprite: "2box", triggerHoleId: "l1-1-box-pit-1" },
+      { x: 1480, width: 79, height: 97, sprite: "2box", triggerHoleId: "l1-1-box-pit-2" },
     ],
 
     trapGround: [
-      { x: 380, width: 120, id: "t1" },
-      { x: 760, width: 120, id: "t2" },
+      {
+        x: 400,
+        width: 360,
+        id: "l1-1-pit",
+        prefallen: true,
+      },
+      {
+        x: 920,
+        width: 120,
+        id: "l1-1-box-pit-1",
+      },
+      {
+        x: 1560,
+        width: 120,
+        id: "l1-1-box-pit-2",
+      },
     ],
 
-    movingPlatforms: [],
+    movingPlatforms: [
+      {
+        x: 520,
+        y: 550,
+        width: 120,
+        range: 100,
+        speed: 160,
+        phase: 0,
+      },
+    ],
     hazards: [],
   },
 
@@ -37,11 +63,11 @@ const LEVEL_1_STAGES = [
       "Dogs in their houses blink in and out.\n" +
       "Time your movement to slip past them when they vanish.\n" +
       "Touch one and you're done.",
-    width: 1280,
+    width: 1900,
     groundY: 550,
     spawn: { x: 80, y: 450 },
-    door: { x: 1150, width: 56, height: 90 },
-    ground: [{ x: 0, width: 1280 }],
+    door: { x: 1770, width: 56, height: 90 },
+    ground: [{ x: 0, width: 1900 }],
 
     blocks: [],
     trapGround: [],
@@ -52,7 +78,7 @@ const LEVEL_1_STAGES = [
     // Player must time their movement to avoid touching a visible dog.
     hazards: [
       {
-        x: 300,
+        x: 350,
         width: 79,
         height: 56,
         sprite: "dog",
@@ -62,7 +88,7 @@ const LEVEL_1_STAGES = [
         flashPhase: 0,
       },
       {
-        x: 680,
+        x: 950,
         width: 79,
         height: 56,
         sprite: "dog",
@@ -72,7 +98,7 @@ const LEVEL_1_STAGES = [
         flashPhase: 0.5,
       },
       {
-        x: 1050,
+        x: 1550,
         width: 79,
         height: 56,
         sprite: "dog",
@@ -100,7 +126,16 @@ const LEVEL_1_STAGES = [
       { x: 1400, width: 500 },
     ],
 
+    blocks: [
+      { x: 120, width: 79, height: 97, sprite: "2box", triggerHoleId: "l1-3-box-pit" },
+    ],
+
     trapGround: [
+      {
+        x: 220,
+        width: 120,
+        id: "l1-3-box-pit",
+      },
       {
         x: 400,
         width: 1000,
