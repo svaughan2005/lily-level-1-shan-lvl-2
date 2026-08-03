@@ -6,7 +6,7 @@
 // ============================================================
 const LEVEL_1_STAGES = [
   {
-    title: "Stage 1 â€” Cause-and-Effect Tics",
+    title: "Stage 1:” Cause-and-Effect Tics",
     intro:
       "From the outside, everything looks calm and ordinary.\n" +
       "But one sudden movement â€” and the ground gives way beneath you.\n" +
@@ -212,7 +212,7 @@ function birdOnTree(treeX, id) {
 
 const LEVEL_2_STAGES = [
   {
-    title: "Stage 1 â€” A New Path",
+    title: "Stage 1: A New Path",
     intro:
       "The road behind you is gone; there's no walking back to it now.\n" +
       "Ahead is somewhere new â€” quiet, green, and watching.\n" +
@@ -250,7 +250,6 @@ const LEVEL_2_STAGES = [
     ],
     movingPlatforms: [],
     hazards: [{
-
 x: 1050,
 width: 79,
 height: 56,
@@ -272,6 +271,7 @@ flashPhase: 0,
       birdOnTree(680, "bird-2"),
       birdOnTree(1350, "bird-3"),
     ],
+    birdFreeze: true,
   },
 
   
@@ -293,7 +293,31 @@ flashPhase: 0,
       { x: 105, width: 1715, surface: "gravel" },
       { x: 1820, width: 80 },
     ],
-    trapGround: [],
+    trapGround: [{
+        x: 740,
+        width: 110,
+        id: "l2-2-gap-1",
+        prefallen: true,
+      },
+    {
+        x: 940,
+        width: 110,
+        id: "l2-2-gap-2",
+        prefallen: true,
+      },
+    {
+        x: 1140,
+        width: 110,
+        id: "l2-2-gap-3",
+        prefallen: true,
+      },
+      {
+        x: 1340,
+        width: 110,
+        id: "l2-2-gap-1",
+        prefallen: true,
+      },
+    ],
     movingPlatforms: [],
     hazards: [],
     blocks: [],
@@ -312,25 +336,62 @@ flashPhase: 0,
     spawn: { x: 80, y: 450 },
     door: { x: 1770, width: 56, height: 90  },
     ground: [{ x: 0, width: 1900 }],
-    trapGround: [],
+    trapGround: [{
+        x: 640,
+        width: 110,
+        id: "l2-2-gap-1",
+        prefallen: true,
+      },
+    {
+        x: 980,
+        width: 110,
+        id: "l2-2-gap-1",
+        prefallen: true,
+      },],
     movingPlatforms: [],
-    hazards: [],
+    groundHazards: [
+      {
+        x: 1100,
+        width: 79,
+        height: 56,
+        range: 150,
+        speed: 120,
+        phase: 0,
+        sprite: "whitedog",
+      },
+       {
+        x: 1500,
+        width: 79,
+        height: 56,
+        range: 150,
+        speed: 120,
+        phase: 0,
+        sprite: "whitedog",
+      },
+    ],
+
+    hazards: [
+      {
+x: 200,
+width: 79,
+height: 56,
+sprite: "dog",
+flash: true,
+flashOn: 0.8,
+flashOff: 1.2,
+flashPhase: 0,
+},
+    ],
     blocks: [],
-    trees: [],
-    birds: [],
-    npc: { x: 650, width: 42, height: 64 },
-    cars: {
-      minX: 0,
-      maxX: 1150,
-      width: 120,
-      height: 66,
-      spawnIntervalMin: 1.6,
-      spawnIntervalMax: 3.2,
-      speedMin: 150,
-      speedMax: 240,
-      honkIntervalMin: 1.3,
-      honkIntervalMax: 2.8,
-    },
+    trees: [ { x: 360, width: TREE_DRAW_W, height: TREE_DRAW_H },
+      { x: 780, width: TREE_DRAW_W, height: TREE_DRAW_H },
+      { x: 1350, width: TREE_DRAW_W, height: TREE_DRAW_H },],
+    birds: [birdOnTree(360, "bird-1"),
+      birdOnTree(780, "bird-2"),
+      birdOnTree(1350, "bird-3"),],
+      birdFreeze: true,
+    
+    
     codeLock: true,
   },
   
@@ -648,6 +709,8 @@ function buildWorld(stages, levelIndex = 0) {
       intro: def.intro,
       startX,
       endX,
+
+      birdFreeze: !!def.birdFreeze,
 
       spawn: {
         x: startX + def.spawn.x,

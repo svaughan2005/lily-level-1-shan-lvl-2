@@ -1543,11 +1543,23 @@ function isBirdWarningActive() {
 // directly against the player's current x each frame (never persisted),
 // so it always reflects this run, not whether the stage was EVER
 // completed before.
+/*
 function areLevel2Stage1BirdsActive() {
   const curSection = getCurrentSection();
-  if (curSection.levelIndex !== 1 || curSection.stageIndex !== 0) return false;
+  if (!curSection.birdFreeze) return false;
   const mb = world.mailboxes.find(
     (m) => m.levelIndex === 1 && m.stageIndex === 0,
+  );
+  return !mb || player.x < mb.x;
+}
+  */
+ function areLevel2Stage1BirdsActive() {
+  const curSection = getCurrentSection();
+  if (!curSection.birdFreeze) return false;
+  const mb = world.mailboxes.find(
+    (m) =>
+      m.levelIndex === curSection.levelIndex &&
+      m.stageIndex === curSection.stageIndex,
   );
   return !mb || player.x < mb.x;
 }
