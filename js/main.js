@@ -410,7 +410,7 @@ const LEVEL_BG_SRC = "assets/images/BG.png";
 const LEVEL3_BG_SRC = "assets/images/BG3.png";
 const TITLE_BG_SRC = "assets/images/titlebg.png";
 // Level 2 gets its own backdrop (BG2.png) so it reads as a distinct space.
-const LEVEL2_BG_SRC = "assets/images/BG2.png";
+const LEVEL2_BG_SRC = "assets/images/bg2-blank.png";
 
 const mailboxUpImg = new Image();
 const mailboxDownImg = new Image();
@@ -2811,9 +2811,27 @@ function draw() {
   // ground line — semi-transparent so the dirt texture from levelbg.png
   // shows through instead of being completely hidden behind a flat fill
   ctx.fillStyle = "rgba(191, 191, 191, 0)";
+  /*
   for (const g of world.def.ground) {
     ctx.fillRect(g.x, world.def.groundY, g.width, VIEW_H);
   }
+    */
+   for (const g of world.def.ground) {
+  ctx.fillRect(g.x, world.def.groundY, g.width, VIEW_H);
+
+  // placeholder visual for gravel/sneak zones
+  if (g.surface === "gravel") {
+    ctx.fillStyle = "#888";
+    ctx.fillRect(
+      g.x,
+      world.def.groundY - 8,
+      g.width,
+      8
+    );
+
+    ctx.fillStyle = "rgba(191, 191, 191, 0)";
+  }
+}
 
   for (const t of world.trapState) {
     if (t.fallen) {

@@ -1,15 +1,15 @@
 // ============================================================
-// LEVEL 1 — five stages/checkpoints (L1-1 through L1-5).
+// LEVEL 1 â€” five stages/checkpoints (L1-1 through L1-5).
 // Levels 2, 4, 5 haven't been built yet; see the WORLD assembly at the
 // bottom of this file for how Level 1 and Level 3 plug into the 5x5
 // level-select grid.
 // ============================================================
 const LEVEL_1_STAGES = [
   {
-    title: "Stage 1 — Cause-and-Effect Tics",
+    title: "Stage 1 â€” Cause-and-Effect Tics",
     intro:
       "From the outside, everything looks calm and ordinary.\n" +
-      "But one sudden movement — and the ground gives way beneath you.\n" +
+      "But one sudden movement â€” and the ground gives way beneath you.\n" +
       "Careful what you jump for.",
     width: 1900,
     groundY: 550,
@@ -58,7 +58,7 @@ const LEVEL_1_STAGES = [
   },
 
   {
-    title: "Stage 2 — Blinking Dogs",
+    title: "Stage 2 â€” Blinking Dogs",
     intro:
       "Dogs in their houses blink in and out.\n" +
       "Time your movement to slip past them when they vanish.\n" +
@@ -111,10 +111,10 @@ const LEVEL_1_STAGES = [
   },
 
   {
-    title: "Stage 3 — Delayed Tics",
+    title: "Stage 3 â€” Delayed Tics",
     intro:
       "Sometimes the reaction doesn't come right away.\n" +
-      "It builds, it delays, and then — right when you commit — it moves.\n" +
+      "It builds, it delays, and then â€” right when you commit â€” it moves.\n" +
       "Time your jump for when the platform arrives, not when you wish it would.",
     width: 1900,
     groundY: 550,
@@ -189,7 +189,7 @@ const LEVEL_1_STAGES = [
 ];
 
 // ============================================================
-// LEVEL 2 — four stages built so far (L2-1 through L2-4). Reuses BG2.png
+// LEVEL 2 â€” four stages built so far (L2-1 through L2-4). Reuses BG2.png
 // as its backdrop and tree.png/bird.png for decorative trees + birds.
 // ============================================================
 const TREE_DRAW_W = 200;
@@ -212,16 +212,16 @@ function birdOnTree(treeX, id) {
 
 const LEVEL_2_STAGES = [
   {
-    title: "Stage 1 — A New Path",
+    title: "Stage 1 â€” A New Path",
     intro:
       "The road behind you is gone; there's no walking back to it now.\n" +
-      "Ahead is somewhere new — quiet, green, and watching.\n" +
+      "Ahead is somewhere new â€” quiet, green, and watching.\n" +
       "Listen closely. Not everything here stays still.",
-    width: 1280,
+    width: 1900,
     groundY: LEVEL_2_GROUND_Y,
     spawn: { x: 80, y: 450 },
-    door: { x: 1150, width: 56, height: 90 },
-    ground: [{ x: 0, width: 1280 }],
+    door: { x: 1770, width: 56, height: 90 },
+    ground: [{ x: 0, width: 1900 }],
     trapGround: [
       {
         x: 140,
@@ -241,33 +241,77 @@ const LEVEL_2_STAGES = [
         id: "l2-1-gap-3",
         prefallen: true,
       },
+      {
+        x: 1200,
+        width: 100,
+        id: "l2-1-gap-3",
+        prefallen: true,
+      },
     ],
     movingPlatforms: [],
-    hazards: [],
+    hazards: [{
+
+x: 1050,
+width: 79,
+height: 56,
+sprite: "dog",
+flash: true,
+flashOn: 0.8,
+flashOff: 1.2,
+flashPhase: 0,
+},],
     blocks: [],
     trees: [
       { x: 260, width: TREE_DRAW_W, height: TREE_DRAW_H },
       { x: 680, width: TREE_DRAW_W, height: TREE_DRAW_H },
-      { x: 1000, width: TREE_DRAW_W, height: TREE_DRAW_H },
+      { x: 1350, width: TREE_DRAW_W, height: TREE_DRAW_H },
+      
     ],
     birds: [
       birdOnTree(260, "bird-1"),
       birdOnTree(680, "bird-2"),
-      birdOnTree(1000, "bird-3"),
+      birdOnTree(1350, "bird-3"),
     ],
   },
 
+  
+
   {
-    title: "Stage 2 — Drowned Out",
+    title: "Stage 2 â€” Underfoot",
     intro:
-      "Someone nearby is trying to tell you something important.\n" +
-      "But the noise keeps cutting in — sudden, loud, impossible to ignore.\n" +
-      "Listen closely. Piece it together, even through the interruptions.",
-    width: 1280,
+      "The path changes beneath your feet before you even see it.\n" +
+      "Every step here announces itself, loud and unavoidable.\n" +
+      "Slow down â€” hold H â€” and even loud ground learns to stay quiet.",
+    width: 1900,
     groundY: LEVEL_2_GROUND_Y,
     spawn: { x: 80, y: 450 },
-    door: { x: 1150, width: 56, height: 90 },
-    ground: [{ x: 0, width: 1280 }],
+    door: { x: 1770, width: 56, height: 90 },
+    // Gravel patch positioned to match the stone path drawn into BG2.png
+    // (roughly local x 105-1200) â€” normal ground on either side of it.
+    ground: [
+      { x: 0, width: 105 },
+      { x: 105, width: 1715, surface: "gravel" },
+      { x: 1820, width: 80 },
+    ],
+    trapGround: [],
+    movingPlatforms: [],
+    hazards: [],
+    blocks: [],
+    trees: [],
+    birds: [],
+  },
+
+  {
+    title: "Stage 3:” Drowned Out",
+    intro:
+      "Someone nearby is trying to tell you something important.\n" +
+      "But the noise keeps cutting in â€” sudden, loud, impossible to ignore.\n" +
+      "Listen closely. Piece it together, even through the interruptions.",
+    width: 1900,
+    groundY: LEVEL_2_GROUND_Y,
+    spawn: { x: 80, y: 450 },
+    door: { x: 1770, width: 56, height: 90  },
+    ground: [{ x: 0, width: 1900 }],
     trapGround: [],
     movingPlatforms: [],
     hazards: [],
@@ -289,112 +333,17 @@ const LEVEL_2_STAGES = [
     },
     codeLock: true,
   },
-
-  {
-    title: "Stage 3 — Underfoot",
-    intro:
-      "The path changes beneath your feet before you even see it.\n" +
-      "Every step here announces itself, loud and unavoidable.\n" +
-      "Slow down — hold H — and even loud ground learns to stay quiet.",
-    width: 1280,
-    groundY: LEVEL_2_GROUND_Y,
-    spawn: { x: 80, y: 450 },
-    door: { x: 1150, width: 56, height: 90 },
-    // Gravel patch positioned to match the stone path drawn into BG2.png
-    // (roughly local x 105-1200) — normal ground on either side of it.
-    ground: [
-      { x: 0, width: 105 },
-      { x: 105, width: 1095, surface: "gravel" },
-      { x: 1200, width: 80 },
-    ],
-    trapGround: [],
-    movingPlatforms: [],
-    hazards: [],
-    blocks: [],
-    trees: [],
-    birds: [],
-  },
-
-  {
-    title: "Stage 4 — Static",
-    intro:
-      "The sky finally lets go, all at once.\n" +
-      "Rain won't hurt you, but the light that follows the thunder can.\n" +
-      "Keep moving — standing still under the wrong flash is a bad idea.",
-    width: 1280,
-    groundY: LEVEL_2_GROUND_Y,
-    spawn: { x: 80, y: 450 },
-    door: { x: 1150, width: 56, height: 90 },
-    ground: [{ x: 0, width: 1280 }],
-    trapGround: [],
-    movingPlatforms: [],
-    hazards: [],
-    blocks: [],
-    trees: [],
-    birds: [],
-    storm: true,
-    // Rain aligns with the green pillars in BG2.png; lightning strikes
-    // are confined to the red pillars \u2014 both measured directly off the
-    // art (local stage coords) instead of roaming the whole stage.
-    rainZones: [
-      { x: 240, width: 80 },
-      { x: 620, width: 80 },
-      { x: 1000, width: 80 },
-    ],
-    lightningZones: [
-      { x: 425, width: 80 },
-      { x: 830, width: 80 },
-    ],
-  },
-
-  {
-    title: "Stage 5 — Bark Back",
-    intro:
-      "Every dog on this street knows exactly where you're headed.\n" +
-      "While they're quiet, walk the way you always have.\n" +
-      "The second they start barking, your own feet turn against you.",
-    width: 1280,
-    groundY: LEVEL_2_GROUND_Y,
-    spawn: { x: 80, y: 450 },
-    door: { x: 1150, width: 56, height: 90 },
-
-    ground: [{ x: 0, width: 1280 }],
-    trapGround: [],
-    movingPlatforms: [],
-    hazards: [],
-    blocks: [],
-    trees: [],
-    birds: [],
-
-    // Stationary dogs (range: 0 means updateGroundHazards() just holds
-    // them at `x` — same entity/collision as every other groundHazard,
-    // still instant-death on touch regardless of bark phase).
-    groundHazards: [
-      { x: 260, width: 79, height: 56, range: 0, speed: 0, sprite: "whitedog" },
-      { x: 610, width: 79, height: 56, range: 0, speed: 0, sprite: "whitedog" },
-      { x: 960, width: 79, height: 56, range: 0, speed: 0, sprite: "whitedog" },
-    ],
-
-    // Flags this section for the barking/inversion mechanic (see
-    // buildWorld() below, and initBarkState()/updateBarkState()/
-    // isControlsInverted() in main.js).
-    barkingDogs: true,
-    barkConfig: {
-      barkOn: 5,
-      barkOff: 5,
-      barkPhase: 0,
-    },
-  },
+  
 ];
 
 // ============================================================
-// LEVEL 3 — three stages built so far (L3-1 through L3-3).
+// LEVEL 3 â€” three stages built so far (L3-1 through L3-3).
 // ============================================================
 const LEVEL_3_STAGES = [
   {
-    title: "Stage 1 — Unwanted Attention",
+    title: "Stage 1 â€” Unwanted Attention",
     intro:
-      "Not every reaction is unkind — but it can still feel like too much.\n" +
+      "Not every reaction is unkind â€” but it can still feel like too much.\n" +
       "Stay aware. Keep moving forward.",
     width: 1280,
     groundY: 550,
@@ -462,7 +411,7 @@ const LEVEL_3_STAGES = [
   },
 
   {
-    title: "Stage 2 — Dialogue",
+    title: "Stage 2 â€” Dialogue",
     intro:
       "Keeping up a conversation means catching every part of it.\n" +
       "Don't let any of it fall past you.",
@@ -519,10 +468,10 @@ const LEVEL_3_STAGES = [
   },
 
   {
-    title: "Stage 3 — Positive / Supportive Social Interactions",
+    title: "Stage 3 â€” Positive / Supportive Social Interactions",
     intro:
       "On your own, some gaps feel too wide to clear.\n" +
-      "Stay near the people who support you, and hold T to lean on them — they'll help you build the speed to cross.",
+      "Stay near the people who support you, and hold T to lean on them â€” they'll help you build the speed to cross.",
     width: 1280,
     groundY: 550,
     spawn: { x: 80, y: 450 },
@@ -581,10 +530,10 @@ const LEVEL_3_STAGES = [
   },
 
   {
-    title: "Stage 4 — Persistent Tics",
+    title: "Stage 4 â€” Persistent Tics",
     intro:
       "Some tics don't stop once they start.\n" +
-      "They keep going, pulling you along — and if you resist, you fall behind.\n" +
+      "They keep going, pulling you along â€” and if you resist, you fall behind.\n" +
       "Sometimes you have to move with the tic, not against it.",
     width: 1280,
     groundY: 550,
@@ -609,10 +558,10 @@ const LEVEL_3_STAGES = [
   },
 
   {
-    title: "Stage 5 — Moving Forward",
+    title: "Stage 5 â€” Moving Forward",
     intro:
       "Sometimes you need a little help to reach new heights.\n" +
-      "Use what's around you — and the people who support you.",
+      "Use what's around you â€” and the people who support you.",
     width: 1280,
     groundY: 550,
     spawn: { x: 80, y: 450 },
@@ -633,7 +582,7 @@ const LEVEL_3_STAGES = [
     hazards: [],
 
     // Jump-boost NPCs: stand near one (let it charge, like Stage 3's
-    // supportive NPCs) to gain a temporary higher jump — enough to
+    // supportive NPCs) to gain a temporary higher jump â€” enough to
     // clear the tall building ahead of it and reach the checkpoint.
     // Placed just before each building so the intended path is
     // "approach the NPC, charge up, clear the building."
@@ -738,7 +687,7 @@ function buildWorld(stages, levelIndex = 0) {
         width: z.width,
       })),
       // Level 2-5's ("Bark Back") barking-dog / control-inversion
-      // mechanic — see initBarkState()/updateBarkState()/
+      // mechanic â€” see initBarkState()/updateBarkState()/
       // isControlsInverted() in main.js.
       barkingDogs: !!def.barkingDogs,
       barkConfig: def.barkConfig || null,
@@ -1072,7 +1021,7 @@ function buildMultiWorld(levelDefs) {
 
     // A wide dead-zone between levels (bigger than the viewport) so the
     // camera, clamped to [0, width - VIEW_W], can never have one level's
-    // far edge and the next level's start on-screen at the same time —
+    // far edge and the next level's start on-screen at the same time â€”
     // they read as fully separate spaces, not one continuous map.
     offsetX += sub.width + LEVEL_GAP;
   }

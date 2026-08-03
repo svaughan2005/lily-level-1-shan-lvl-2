@@ -1,5 +1,5 @@
 // ============================================================
-// LEVEL SELECT — persistent stage progress + the 5x5 stage-picker
+// LEVEL SELECT â€” persistent stage progress + the 5x5 stage-picker
 // screen. Load this script AFTER levels.js (it reads WORLD.sections)
 // and BEFORE main.js (main.js calls into Progress / showLevelSelect).
 // ============================================================
@@ -40,7 +40,7 @@ const Progress = {
       localStorage.setItem(SAVE_KEY, JSON.stringify(this.data));
     } catch (e) {
       // Storage unavailable (private browsing, quota, etc). Progress
-      // just won't persist across reloads — the game still runs fine
+      // just won't persist across reloads â€” the game still runs fine
       // for the current session.
     }
   },
@@ -107,8 +107,8 @@ function findMailbox(levelIdx, stageIdx) {
 }
 
 // Whether a specific stage (not just its level) actually exists in the
-// built WORLD. Levels can be partially built — e.g. Level 3 currently
-// only has stages 0-2 — so this checks WORLD.sections directly rather
+// built WORLD. Levels can be partially built â€” e.g. Level 3 currently
+// only has stages 0-2 â€” so this checks WORLD.sections directly rather
 // than trusting builtLevelIndices, which is level-granularity only.
 function isStageBuilt(levelIdx, stageIdx) {
   return WORLD.sections.some(
@@ -117,14 +117,14 @@ function isStageBuilt(levelIdx, stageIdx) {
 }
 
 // Whenever a level's final stage is completed, this makes sure the
-// *next playable* level gets unlocked — skipping over any level that
+// *next playable* level gets unlocked â€” skipping over any level that
 // isn't built yet (e.g. Level 2, still being worked on by another team)
 // so finishing Level 1 opens Level 3 instead of dead-ending on a level
 // nobody can enter. Safe to call any time: it only ever adds unlocks,
 // never removes them, so it's idempotent and also self-heals older save
 // data that unlocked an unbuilt level under the old logic. Once Level 2
 // (or any skipped level) actually gets built, this automatically routes
-// through it again in the correct order on the next call — no changes
+// through it again in the correct order on the next call â€” no changes
 // needed here when that happens.
 function bridgeUnbuiltLevels() {
   Progress.load();
@@ -215,7 +215,7 @@ function buildLevelSelectDOM() {
     playMenuMusic();
     hideLevelSelect();
     // Back to the main menu. This resets the in-progress run's live
-    // state (world, camera, player position) — saved Progress is
+    // state (world, camera, player position) â€” saved Progress is
     // untouched, so completed/unlocked stages are unaffected.
     loadWorld();
     showStartOverlay();
@@ -251,7 +251,7 @@ function refreshLevelSelectGrid(grid) {
       btn.dataset.level = levelIdx;
       btn.dataset.stage = stageIdx;
 
-      // Per-stage build check — a level can be partially built (e.g.
+      // Per-stage build check â€” a level can be partially built (e.g.
       // Level 3 currently only has stages 0-2), so stages 3/4 of a
       // partially-built level stay locked even though earlier stages in
       // that same level are playable today.
